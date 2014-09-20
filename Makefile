@@ -96,20 +96,20 @@ $(libpe_BUILDDIR)/%.o: %.c
 
 install: installdirs
 ifeq ($(PLATFORM_OS), Linux)
-	$(INSTALL_DATA) $(LIBNAME).so $(DESTDIR)$(libdir)/$(LIBNAME).so.$(VERSION)
-	cd $(DESTDIR)$(libdir); $(SYMLINK) $(LIBNAME).so.$(VERSION) $(LIBNAME).so
-	cd $(DESTDIR)$(libdir); $(SYMLINK) $(LIBNAME).so.$(VERSION) $(LIBNAME).so.1
+	$(INSTALL_DATA) $(LIBNAME).so $(libdir)/$(LIBNAME).so.$(VERSION)
+	cd $(libdir); $(SYMLINK) $(LIBNAME).so.$(VERSION) $(LIBNAME).so
+	cd $(libdir); $(SYMLINK) $(LIBNAME).so.$(VERSION) $(LIBNAME).so.1
 else ifeq ($(PLATFORM_OS), Darwin)
-	$(INSTALL_DATA) $(LIBNAME).dylib $(DESTDIR)$(libdir)/$(LIBNAME).$(VERSION).dylib
-	cd $(DESTDIR)$(libdir); $(SYMLINK) $(LIBNAME).$(VERSION).dylib $(LIBNAME).dylib
-	cd $(DESTDIR)$(libdir); $(SYMLINK) $(LIBNAME).$(VERSION).dylib $(LIBNAME).1.dylib
+	$(INSTALL_DATA) $(LIBNAME).dylib $(libdir)/$(LIBNAME).$(VERSION).dylib
+	cd $(libdir); $(SYMLINK) $(LIBNAME).$(VERSION).dylib $(LIBNAME).dylib
+	cd $(libdir); $(SYMLINK) $(LIBNAME).$(VERSION).dylib $(LIBNAME).1.dylib
 else ifeq ($(PLATFORM_OS), CYGWIN)
 	# TODO
 endif
 
 installdirs:
 	@$(CHK_DIR_EXISTS) $(DESTDIR) || $(MKDIR) $(DESTDIR)
-	@$(CHK_DIR_EXISTS) $(DESTDIR)$(libdir) || $(MKDIR) $(DESTDIR)$(libdir)
+	@$(CHK_DIR_EXISTS) $(libdir) || $(MKDIR) $(libdir)
 
 strip-binaries:
 ifeq ($(PLATFORM_OS), Linux)
@@ -123,8 +123,8 @@ endif
 install-strip: strip-binaries install
 
 uninstall:
-	$(RM) $(DESTDIR)$(libdir)/$(LIBNAME).so* \
-		$(DESTDIR)$(libdir)/$(LIBNAME)*.dylib
+	$(RM) $(libdir)/$(LIBNAME).so* \
+		$(libdir)/$(LIBNAME)*.dylib
 
 clean:
 	$(RM_DIR) $(libpe_BUILDDIR)
