@@ -5,8 +5,13 @@ PLATFORM_OS := $(shell uname | cut -d_ -f1)
 
 ####### Makefile Conventions - Directory variables
 
+ifndef DESTDIR
+        prefix = /usr/local
+else
+        prefix = $(DESTDIR)
+endif
+
 srcdir = .
-prefix = /usr/local
 
 exec_prefix = $(prefix)
 sysconfdir = $(prefix)/etc
