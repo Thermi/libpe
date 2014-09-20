@@ -1,7 +1,5 @@
 libpe
 =====
 
-The PE library
-
-[![Build Status](https://travis-ci.org/merces/libpe.png)](https://travis-ci.org/merces/libpe)
+Thermi's own fork of libpe to fix installing to DESTDIR
 
